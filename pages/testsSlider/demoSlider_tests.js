@@ -94,11 +94,11 @@ const viewTest = new View();
 const contrTest = new Controller();
 
 describe("1. Определение ориентации.", function() {
-  it("Controller.checkOrientation: ", function() {
-    assert.equal(contrTest.checkOrientation(obj.orientation), 'x' );
+  it("Controller.defineOrientation: ", function() {
+    assert.equal(contrTest.defineOrientation(obj.orientation), 'x' );
   });
 });
-//2. Controller.movie (void)
+
 //3. Controller.moveAt (void)
 /*describe("4. Определение позиции элемента.", function() {//что-то не получилось
   it("Controller.getCoords: ", function() {
@@ -111,17 +111,17 @@ describe("1. Определение ориентации.", function() {
 console.log('get', modelTest.posRangeLeft(obj.element, obj.idElement), parseInt(389/(200-10)*(50-10)), contrTest.getCoords(modelTest.rangeLeft(obj.element, obj.idElement)));*/
 
 // 5. Controller.movingRange (void)
-// 6. Controller.writeValueMin (void)
-// 7. Controller.writeValueMax (void)
-// 8. Controller.checkDataSliderMin (void)
-// 9. Controller.checkDataSliderMax (void)
-// 10. Controller.configMinChange (void)
-// 11. Controller.configMaxChange (void)
-// 12. Controller.clickSlider (void)
-// 13. Controller.checkRangeThisStep (void) // внутри вызывается masScale(), поэтому не могу написать тест
+// 6. Controller.drawValueMin (void)
+// 7. Controller.drawValueMax (void)
+// 8. Controller.writeDataSliderMin (void)
+// 9. Controller.writeDataSliderMax (void)
+// 10. Controller.changeConfigInputMin (void)
+// 11. Controller.changeConfigInputMax (void)
+// 12. Controller.moveRangeOnclickSlider (void)
+// 13. Controller.definePosStepClosestClick (void) // внутри вызывается masScale(), поэтому не могу написать тест
 
 /*describe("14. Массив пикселей, по которым располагаются шаги сладера.", function() {//получаю одинаковые массивы, но не засчитываются за равные
-  it("Controller.masScale: ", function() {
+  it("controller.masStepsForMoving: ", function() {
     assert.equal(contrTest.masScale(obj.element, obj, modelTest), [parseInt(389/(200-10)*20*0), parseInt(389/(200-10)*20*1), 81, 122, 163, 204, 245, 286, 327, 368] );
   });
 });

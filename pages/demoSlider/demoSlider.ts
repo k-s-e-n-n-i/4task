@@ -2,8 +2,7 @@
 import {slider} from '/pages/demoSlider/plugin.demoSlider.ts';
 
 
-const slider_1 = new slider();
-slider_1.slider({
+const slider_1 = new slider({
   element : document.querySelector('.slider .slider4'),
   idElement : 'idSlider4',
   width : 400,
@@ -19,8 +18,9 @@ slider_1.slider({
   scaleStep : 20,
   settings : 'on'
 });
-const slider_2 = new slider();
-slider_2.slider({
+slider_1.slider();
+
+const slider_2 = new slider({
   element : document.querySelector('.slider .slider2'),
   idElement : 'idSlider2',
   width : 400,
@@ -36,8 +36,9 @@ slider_2.slider({
   scaleStep : 10,
   settings : 'on'
 });
-const slider_3 = new slider();
-slider_3.slider({
+slider_2.slider();
+
+const slider_3 = new slider({
   element : document.querySelector('.slider .slider5'),
   idElement : 'idSlider5',
   width : 600,
@@ -49,8 +50,9 @@ slider_3.slider({
   scale : 'on',
   settings : 'on'
 });
-const slider_4 = new slider();
-slider_4.slider({
+slider_3.slider();
+
+const slider_4 = new slider({
   element : document.querySelector('.slider .slider3'),
   idElement : 'idSlider3',
   type : 'one',
@@ -59,9 +61,11 @@ slider_4.slider({
   maxStart : 2000,
   settings : 'on'
 });
-const slider_5 = new slider();
-slider_5.slider({
+slider_4.slider();
+
+const slider_5 = new slider({
   element : document.querySelector('.slider .slider1'),
   idElement : 'idSlider1',
   settings : 'on'
 });
+slider_5.slider();
