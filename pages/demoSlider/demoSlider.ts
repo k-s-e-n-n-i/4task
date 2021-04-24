@@ -35,6 +35,7 @@ $(function() {
     min : 0,
     max : 5000,
     maxStart : 2000,
+    scaleStep : 5,
     settings : 'on'
   });
 
@@ -47,7 +48,7 @@ $(function() {
     max : 200,
     minStart : 0,
     maxStart : 100,
-    step : 1,
+    step : 20,
     orientation : 'horizontal',
     value : 'on',
     scale : 'on',

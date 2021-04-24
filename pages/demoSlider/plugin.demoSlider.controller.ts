@@ -43,10 +43,10 @@ export class Controller {
     return 'y';
   }
   
-  moveAt(range, e, lr : string) : void{
-    let startPos = parseInt(range.style.left);
-    let indWidth = this.model.getWidthRange();
-    switch(lr){//чтобы сверху был ползунок, который перемещали последним (если друг на друга наедут)
+  moveAt(range : object, e : object, side : string) : void{
+    let startPos : number = parseInt(range.style.left),
+      widthRange : number = this.model.getWidthRange();
+    switch(side){//чтобы сверху был ползунок, который перемещали последним (если друг на друга наедут)
       case 'left' : {
         this.model.getRangeLeft().style.zindex = 15;
         this.model.getRangeRight().style.zindex = 10;
@@ -58,22 +58,23 @@ export class Controller {
         break;
       }
     }
-    let thisClick = this.thisSlider, contr = this;
+
+    let thisClick : object = this.thisSlider, contr = this;
     thisClick.onmousemove = function(e) {
-      let pos, p;
+      let pos : number,
+        tempPos : number,
+        masScale : number[];
       switch(contr.defineOrientation(contr.orientation)) {
         case 'x': {
           if (contr.step == 1){
             pos = e.pageX - parseInt(contr.model.getSlider().offsetLeft);
-            contr.movingRange(lr, startPos, pos, indWidth);
+            contr.movingRange(side, startPos, pos, widthRange);
           }else{
-            let masScale = contr.masStepsForMoving();
-            
-            p = e.pageX - parseInt(contr.model.getSlider().offsetLeft);
-  
-            if (masScale.indexOf(p) != -1){
-              pos = p;
-              contr.movingRange(lr, startPos, pos, indWidth);
+            masScale = contr.masStepsForMoving();
+            tempPos = e.pageX - parseInt(contr.model.getSlider().offsetLeft);
+            if (masScale.indexOf(tempPos) != -1){
+              pos = tempPos;
+              contr.movingRange(side, startPos, pos, widthRange);
             }else{
               pos = startPos;
             }
@@ -83,15 +84,13 @@ export class Controller {
         case 'y': {
           if (contr.step == 1){
             pos = e.pageY - contr.getCoords(contr.model.getSlider()).top;
-            contr.movingRange(lr, startPos, pos, indWidth);
+            contr.movingRange(side, startPos, pos, widthRange);
           }else{
-            let masScale = contr.masStepsForMoving();
-  
-            p = e.pageY - contr.getCoords(contr.model.getSlider()).top;
-            
-            if (masScale.indexOf(p) != -1){
-              pos = p;
-              contr.movingRange(lr, startPos, pos, indWidth);
+            masScale = contr.masStepsForMoving();
+            tempPos = e.pageY - contr.getCoords(contr.model.getSlider()).top;
+            if (masScale.indexOf(tempPos) != -1){
+              pos = tempPos;
+              contr.movingRange(side, startPos, pos, widthRange);
             }else{
               pos = startPos;
             }
@@ -108,17 +107,18 @@ export class Controller {
     }; 
   }
   getCoords(elem : any) : object { // https://learn.javascript.ru/coordinates-document
-    var box = elem.getBoundingClientRect();
+    let box : object = elem.getBoundingClientRect();
     return {
       top: box.top + pageYOffset,
       left: box.left + pageXOffset
     };
   }
   
-  movingRange(lr : string, startPos : number, pos : number, indWidth : number) : void{
-    let price, step = 0;
+  movingRange(side : string, startPos : number, pos : number, widthRange : number) : void{
+    let price : number,
+      step: number = 0;
     if ((pos >= 0) && (pos <= this.model.getWidth())){
-      if (lr == 'left'){	
+      if (side == 'left'){	
         if ((this.model.getPosRangeRight() >= pos)&&(this.type != 'from0to')){
           step = startPos - pos;//длина перемещения левого указателя	
           price = calcValue(pos, this);
@@ -130,11 +130,11 @@ export class Controller {
             this.changeConfigInputMin(price);
           }
           this.writeDataSliderMin(price);
-          this.model.getRange().style.width = indWidth+step+'px';
+          this.model.getRange().style.width = widthRange + step +'px';
         }
       }
 
-      if (lr == 'right'){
+      if (side == 'right'){
         if (this.model.getPosRangeLeft() <= pos){
           step = pos - startPos;//длина перемещения правого указателя
           price = calcValue(pos, this);
@@ -144,13 +144,13 @@ export class Controller {
             this.changeConfigInputMax(price);
           }
           this.writeDataSliderMax(price);
-          this.model.getRange().style.width = indWidth+step+'px';
+          this.model.getRange().style.width = widthRange + step +'px';
         }
       }
     }
     function calcValue(pos : number, conrtThis : any) : number{
-      let pr = pos / conrtThis.model.getWidth(),
-        price = ((conrtThis.max - conrtThis.min) * pr + conrtThis.min).toFixed();
+      let percent : number = pos / conrtThis.model.getWidth(),
+        price : number = ((conrtThis.max - conrtThis.min) * percent + conrtThis.min).toFixed();
       return price;
     }
   }
@@ -181,10 +181,13 @@ export class Controller {
   }
         
   moveRangeOnclickSlider() : void{
-    let thisClick = this.thisSlider.querySelector('.range-slider__slider'), contr = this;
+    let thisClick : object = this.thisSlider.querySelector('.range-slider__slider'),
+      contr : object = this;
+    
     thisClick.onmousedown = function(e) {	
       thisClick.onmouseup = function(e) {
-        let pos, startPos;
+        let pos: number,
+          startPos : number;
 
         switch(contr.defineOrientation(contr.orientation)) {
           case 'x': {
@@ -204,8 +207,8 @@ export class Controller {
         }
         switch(contr.type) {
           case 'interval' : {
-            let posL = contr.model.getPosRangeLeft(),
-              posR = contr.model.getPosRangeRight();
+            let posL : number = contr.model.getPosRangeLeft(),
+              posR : number = contr.model.getPosRangeRight();
             if (Math.abs(posL - pos) < Math.abs(posR - pos)) {
               startPos = contr.model.getPosRangeLeft();
               contr.movingRange('left', contr.model.getPosRangeLeft(), 
@@ -234,41 +237,44 @@ export class Controller {
     }
   }
   definePosStepClosestClick(pos : number) : number{
-    let p = 0, 
-      masScale,
-      len = this.model.getWidth();
+    let finalPos : number = 0, 
+      masScale : number[],
+      len : number = this.model.getWidth(),
+      lenL : number,
+      lenR : number;
 
     masScale = this.masStepsForMoving();
     for (let i = 0; i < masScale.length; i++){
-      let lenL = Math.abs(masScale[i] - pos),
-        lenR = Math.abs(masScale[i+1] - pos);
+      lenL = Math.abs(masScale[i] - pos);
+      lenR = Math.abs(masScale[i+1] - pos);
       
       if (lenL < len) {
-        p = masScale[i];
+        finalPos = masScale[i];
         len = lenL;
       }else if (lenR < len){
-        p = masScale[i+1];
+        finalPos = masScale[i+1];
         len = lenR;
       }
     }
 
-    return p;
+    return finalPos;
   }
   masStepsForMoving() : number[]{
-    let sumSegments = (this.max - this.min) / this.step,
-      w1 = this.model.getWidth() / (this.max - this.min),//одно деление
-      w = w1 * this.step, //длина шага
-      masScale=[];
+    let qtyDivision : number = (this.max - this.min) / this.step,
+      widthOneDivision : number = this.model.getWidth() / (this.max - this.min),//одно деление
+      widthStep : number = widthOneDivision * this.step, //длина шага
+      masScale : number[] = [];
     
-    for (let i = 0; i <= sumSegments; i++) {
-      masScale[i] = w*i;//parseInt(w*i); //без parseInt, чтобы точность стоимости была выше
+    for (let i = 0; i <= qtyDivision; i++) {
+      masScale[i] = widthStep * i;//parseInt(w*i); //без parseInt, чтобы точность стоимости была выше
     }
 
     return masScale;
   }
   
   applyConfig() : void{
-    let thisClick = this.thisSlider.querySelector('.slider-config .checkbox-list__input'), contr = this;
+    let thisClick : object = this.thisSlider.querySelector('.slider-config .checkbox-list__input'),
+      contr : object = this;
 
     thisClick.onclick = function(e) {
       if (thisClick.checked == true){
@@ -277,17 +283,17 @@ export class Controller {
         contr.thisSlider.querySelector('.slider-config .slider-config__block').style.display = 'none';
       }
 
-      let inputS = contr.thisSlider.getElementsByClassName('input-text__input');
+      let inputS : object = contr.thisSlider.getElementsByClassName('input-text__input');
       for(var i = 0; i < inputS.length; i++) {
         inputS[i].onblur = function (){
           let idInput = this.id,
-            id = contr.idElement.substr(-1),
-            min,
-            max,
-            minStart,
-            maxStart,
-            step,
-            scaleStep;
+            id  : number = contr.idElement.substr(-1),
+            min : number,
+            max : number,
+            minStart : number,
+            maxStart : number,
+            step : number,
+            scaleStep : number;
 
           if ( (idInput.indexOf('min',0) != -1) && (idInput.indexOf('minStart',0) == -1)){
             min = Number.parseInt(this.value);
@@ -341,13 +347,20 @@ export class Controller {
         }
       }
 
-      let radioS = contr.thisSlider.getElementsByClassName('radiogroup__input');
+      let radioS : object = contr.thisSlider.getElementsByClassName('radiogroup__input');
       for(var i = 0; i < radioS.length; i++) {
         radioS[i].onclick = function (){
-          let id = contr.idElement.substr(-1),
-            idStr = this.name,
-            type, orientation, value, scale,
-            typeId, orientationID, valueID, scaleID;
+          let id : number = contr.idElement.substr(-1),
+            idStr : string = this.name,
+            type : string, 
+            orientation : string, 
+            value : string, 
+            scale : string,
+            typeId : string, 
+            orientationID :string, 
+            valueID : string, 
+            scaleID : string;
+          
           if (idStr.indexOf('Type',0) != -1){
             typeId = this.id.substr(-1);
             switch(typeId) {
@@ -412,9 +425,9 @@ export class Controller {
     };	
 
     function clear(thisSlider : any, id : number){
-      let x = thisSlider.querySelectorAll('.range-slider#idSlider'+id+' .range-slider__slider .range-slider__scale');
-      for (let i=0; i<x.length; i++){
-        x[i].remove();
+      let blocksScale : object = thisSlider.querySelectorAll('.range-slider#idSlider'+id+' .range-slider__slider .range-slider__scale');
+      for (let i = 0; i < blocksScale.length; i++){
+        blocksScale[i].remove();
       }	
 
       thisSlider.querySelector('.range-slider#idSlider'+id+' .range-slider__left').style.display = 'inline-block';
@@ -432,8 +445,11 @@ export class Controller {
     this.model.getRangeSlider().querySelector('.range-slider__label-min').innerHTML = this.minStart;
     this.model.getRangeSlider().querySelector('.range-slider__label-max').innerHTML = this.maxStart;
     
-    let typeID, orientationID, valueID, scaleID,
-      id = this.idElement.substr(-1);
+    let typeID : string, 
+      orientationID : string, 
+      valueID : string, 
+      scaleID : string,
+      id : number = this.idElement.substr(-1);
 
     switch(this.type) {
       case 'interval'	: typeID = '1'; break;

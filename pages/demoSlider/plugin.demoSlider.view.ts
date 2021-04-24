@@ -32,7 +32,8 @@ export class View {
   }
 
   drawRange() : void{
-    let posLeft : any, posRight : any;
+    let posLeft : number, 
+      posRight : number;
   
     posRight = ( this.model.getWidth() / (this.max - this.min) ) * (this.maxStart - this.min);
     this.model.getRangeRight().style.left = posRight +'px';
@@ -73,6 +74,7 @@ export class View {
   }
         
   drawType() : void{
+    let blockLabelVal : any;
     switch(this.type) {
       case 'interval' : break;
         this.model.getRangeLeft().style.display = 'block';
@@ -80,9 +82,9 @@ export class View {
         this.model.getRange().style.display = 'block';
         this.model.getRange().style.transform = 'translate('+this.model.getPosRangeLeft()+'px, 0px)';
         this.model.getRange().style.width = this.model.getPosRangeRight() - this.model.getPosRangeLeft();
-        let spans = this.model.getRangeSlider().querySelector('.range-slider__label-block');
-        spans.querySelector('span.range-slider__label-min').style.display = 'block';
-        spans.querySelector('span.range-slider__label-dash').style.display = 'block';
+        blockLabelVal = this.model.getRangeSlider().querySelector('.range-slider__label-block');
+        blockLabelVal.querySelector('span.range-slider__label-min').style.display = 'block';
+        blockLabelVal.querySelector('span.range-slider__label-dash').style.display = 'block';
         break;
       case 'from0to' : {
         this.model.getRangeLeft().style.display = 'none';
@@ -93,9 +95,9 @@ export class View {
       case 'one' : {
         this.model.getRangeLeft().style.display = 'none';
         this.model.getRange().style.display = 'none';
-        let spans = this.model.getRangeSlider().querySelector('.range-slider__label-block');
-        spans.querySelector('span.range-slider__label-min').style.display = 'none';
-        spans.querySelector('span.range-slider__label-dash').style.display = 'none';
+        blockLabelVal = this.model.getRangeSlider().querySelector('.range-slider__label-block');
+        blockLabelVal.querySelector('span.range-slider__label-min').style.display = 'none';
+        blockLabelVal.querySelector('span.range-slider__label-dash').style.display = 'none';
         break;
       }
       default : break;
@@ -105,31 +107,35 @@ export class View {
   drawScale() : void{
     switch(this.scale) {
       case 'on' : {
-        let scaleKol,
-        ch = this.min,
-        ii, shBlock, divBlock;
+        let qtyDivision : number,
+        valDivision : number = this.min,
+        posDivision : number,
+        stepWidth : number, 
+        elemDivision : any,
+        blockScale : any;
+
         if (this.scaleStep > 0){
-          scaleKol = this.scaleStep;
+          qtyDivision = this.scaleStep;
         }else{
-          scaleKol = Math.floor(this.model.getWidth()/45);
-          this.scaleStep = scaleKol;
+          qtyDivision = Math.floor(this.model.getWidth()/45);
+          this.scaleStep = qtyDivision;
         }
 
-        let scaleWidth = this.model.getWidth()/scaleKol;
+        stepWidth = this.model.getWidth()/qtyDivision;
         
         for(let i = 0; i <= this.model.getWidth();){
-          ii = Math.floor(i);
-          divBlock = `<div class="range-slider__scale">
-            <div class="range-slider__scale-line" id="scale${ii}"></div>
+          posDivision = Math.floor(i);
+          blockScale = `<div class="range-slider__scale">
+            <div class="range-slider__scale-line" id="scale${posDivision}"></div>
             </div>`;
-          this.model.getSlider().insertAdjacentHTML('beforeend', divBlock);
-          shBlock = this.model.getSlider().querySelector('.range-slider__scale-line#scale'+ii).closest('.range-slider__scale');
-          shBlock.style.left =ii+'px';
+          this.model.getSlider().insertAdjacentHTML('beforeend', blockScale);
+          elemDivision = this.model.getSlider().querySelector('.range-slider__scale-line#scale'+posDivision).closest('.range-slider__scale');
+          elemDivision.style.left =posDivision+'px';
           this.model.getRangeSlider().style.marginBottom = '35px';
-          i = i + scaleWidth;
-          shBlock.insertAdjacentHTML('beforeend', 
-                '<div class="range-slider__scale-val">'+Math.floor(ch)+'</div>');
-          ch = ch + (this.max-this.min)/scaleKol;
+          i = i + stepWidth;
+          elemDivision.insertAdjacentHTML('beforeend', 
+                '<div class="range-slider__scale-val">'+Math.floor(valDivision)+'</div>');
+          valDivision = valDivision + (this.max-this.min)/qtyDivision;
         }
         break;
       }
@@ -139,6 +145,7 @@ export class View {
   }
   
   drawOrientation() : void{
+    let blockVals : any;
     switch(this.orientation) {
       case 'horizontal': {
         this.model.getSlider().style.transform = 'translate(5px, 0) rotate(0deg)';
@@ -149,9 +156,9 @@ export class View {
         this.model.getSlider().style.transform = 'translate(5px, 0) rotate(90deg) translateX(50%)';
         this.model.getRangeSlider().style.height = this.model.getWidth()+75+'px';
         
-        let vals = this.model.getSlider().querySelectorAll('.range-slider__scale-val');
-        for (let i = 0; i < vals.length; i++){
-          vals[i].style.transform = 'translate(5px, 0) rotate(-90deg)';
+        blockVals = this.model.getSlider().querySelectorAll('.range-slider__scale-val');
+        for (let i = 0; i < blockVals.length; i++){
+          blockVals[i].style.transform = 'translate(5px, 0) rotate(-90deg)';
         }
         break;
       }
@@ -164,35 +171,36 @@ export class View {
   }
   
   drawValue() : void{
+    let blockLabelVal : any;
     switch(this.value) {
       case 'on' : {
         this.model.getRangeSlider().querySelector('.range-slider__label-block').style.display = 'flex';
         this.model.getRangeSlider().querySelector('.range-slider__label-max').innerHTML = this.maxStart;
-        let spans = this.model.getRangeSlider().querySelector('.range-slider__label-block');
+        blockLabelVal = this.model.getRangeSlider().querySelector('.range-slider__label-block');
 
         switch(this.type) {
           case 'interval' : {
             this.model.getRangeSlider().querySelector('.range-slider__label-min').innerHTML = this.minStart;
-            spans.querySelector('span.range-slider__label-min').style.display = 'block';
-            spans.querySelector('span.range-slider__label-dash').style.display = 'block';
+            blockLabelVal.querySelector('span.range-slider__label-min').style.display = 'block';
+            blockLabelVal.querySelector('span.range-slider__label-dash').style.display = 'block';
             break;
           }
           case 'from0to' : {
             this.model.getRangeSlider().querySelector('.range-slider__label-min').innerHTML = this.min;
-            spans.querySelector('span.range-slider__label-min').style.display = 'block';
-            spans.querySelector('span.range-slider__label-dash').style.display = 'block';
+            blockLabelVal.querySelector('span.range-slider__label-min').style.display = 'block';
+            blockLabelVal.querySelector('span.range-slider__label-dash').style.display = 'block';
             break;
           }
           case 'one' : {
             this.model.getRangeSlider().querySelector('.range-slider__label-min').innerHTML = this.minStart;
-            spans.querySelector('span.range-slider__label-min').style.display = 'none';
-            spans.querySelector('span.range-slider__label-dash').style.display = 'none';
+            blockLabelVal.querySelector('span.range-slider__label-min').style.display = 'none';
+            blockLabelVal.querySelector('span.range-slider__label-dash').style.display = 'none';
             break;
           }
           default : {//interval
             this.model.getRangeSlider().querySelector('.range-slider__label-min').innerHTML = this.minStart;
-            spans.querySelector('span.range-slider__label-min').style.display = 'block';
-            spans.querySelector('span.range-slider__label-dash').style.display = 'block';
+            blockLabelVal.querySelector('span.range-slider__label-min').style.display = 'block';
+            blockLabelVal.querySelector('span.range-slider__label-dash').style.display = 'block';
             break;
           }
         }

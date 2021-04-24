@@ -5,7 +5,7 @@ import {Controller} from '/pages/demoSlider/plugin.demoSlider.controller.ts';
 
 
 (function( $ ) {
-	$.fn.slider = function(options) {
+	$.fn.slider = function(options : object) {
 
     class Slider {
       public element : any;
@@ -24,7 +24,7 @@ import {Controller} from '/pages/demoSlider/plugin.demoSlider.controller.ts';
       public settings : string = 'on';
       public dataSlider : object = {};
       
-      constructor(option){
+      constructor(option : object){
         this.dataSlider = {
           element : option.element,
           idElement : option.idElement,

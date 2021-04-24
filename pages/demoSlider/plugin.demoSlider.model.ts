@@ -4,7 +4,7 @@ export class Model {
   thisSlider : any;
   idElement : string;
 
-  constructor(option){
+  constructor(option : object){
     this.thisSlider = option.element;
     this.idElement = option.idElement;
   }
