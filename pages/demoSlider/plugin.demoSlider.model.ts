@@ -1,3 +1,5 @@
+import $ from "jquery"
+
 export class Model {
   thisSlider : any;
   idElement : string;
@@ -51,38 +53,4 @@ export class Model {
   configItemRadiobtn : string = `.slider-config .slider-config__block .slider-config__block-items
         .slider-config__option .radiogroup `
   heightBlockSlider : string = '80px'
-
-  /*getWidth(thisSlider : any, dataSliderID : string) : number{
-    return thisSlider.querySelector('.range-slider#'+dataSliderID+' .range-slider__slider').clientWidth;
-  }
-  getRangeSlider(thisSlider : any, dataSliderID : string) : any{
-    return thisSlider.querySelector('.range-slider#'+dataSliderID);
-  }
-  getSlider(thisSlider : any, dataSliderID : string) : any{ 
-    return this.getRangeSlider(thisSlider, dataSliderID).querySelector('.range-slider__slider');
-  }
-  getRange(thisSlider : any, dataSliderID : string) : any{ 
-    return this.getSlider(thisSlider, dataSliderID).querySelector('.range-slider__range');
-  }
-  getWidthRange(thisSlider : any, dataSliderID : string) : number{
-    return this.getRange(thisSlider, dataSliderID).clientWidth;
-  }
-  getRangeLeft(thisSlider : any, dataSliderID : string) : any{ 
-    return this.getSlider(thisSlider, dataSliderID).querySelector('.range-slider__left');
-  }
-  getPosRangeLeft(thisSlider : any, dataSliderID : string) : number{
-    return parseInt(getComputedStyle(this.getRangeLeft(thisSlider, dataSliderID)).left);
-  }
-  getRangeRight(thisSlider : any, dataSliderID : string) : any{ 
-    return this.getSlider(thisSlider, dataSliderID).querySelector('.range-slider__right');
-  }
-  getPosRangeRight(thisSlider : any, dataSliderID : string) : number{
-    return parseInt(getComputedStyle(this.getRangeRight(thisSlider, dataSliderID)).left);
-  }
-  getElemValueMin(thisSlider : any) : any{
-    return thisSlider.querySelector('.range-slider__label-min');
-  }
-  getElemValueMax(thisSlider : any) : any{
-    return thisSlider.querySelector('.range-slider__label-max');
-  }*/
 }

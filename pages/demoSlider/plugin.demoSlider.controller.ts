@@ -1,7 +1,8 @@
+import $ from "jquery"
+
 export class Controller {
   model : any;
   view : any;
-  //dataSlider : object;
   thisSlider : any;
   idElement : string;
   min: number;
@@ -19,7 +20,6 @@ export class Controller {
   constructor(option, model, view){
     this.model = model;
     this.view = view;
-    //this.dataSlider = option;
     this.thisSlider = option.element;
     this.idElement = option.idElement;
     this.min = option.min;
@@ -140,7 +140,6 @@ export class Controller {
           price = calcValue(pos, this);
           this.model.getRangeRight().style.left = pos+'px';//позиция указателей
           this.drawValueMax(price);
-          console.log(this)
           if (this.settings == 'on'){
             this.changeConfigInputMax(price);
           }
@@ -178,7 +177,6 @@ export class Controller {
   }
   changeConfigInputMax(val : number) : void{
     if (val > this.max){val = this.max;}
-    console.log(this.thisSlider.querySelector(`.slider-config .slider-config__block .input-text #inputTextmaxStart`+this.idElement.substr(-1)).value)
     this.thisSlider.querySelector(`.slider-config .slider-config__block .input-text #inputTextmaxStart`+this.idElement.substr(-1)).value = val;
   }
         
@@ -270,11 +268,9 @@ export class Controller {
   }
   
   applyConfig() : void{
-    console.log(this.thisSlider)
     let thisClick = this.thisSlider.querySelector('.slider-config .checkbox-list__input'), contr = this;
 
     thisClick.onclick = function(e) {
-      console.log(thisClick, contr, this.id)
       if (thisClick.checked == true){
         contr.thisSlider.querySelector('.slider-config .slider-config__block').style.display = 'block';
       }else{
@@ -282,7 +278,6 @@ export class Controller {
       }
 
       let inputS = contr.thisSlider.getElementsByClassName('input-text__input');
-      console.log(inputS)
       for(var i = 0; i < inputS.length; i++) {
         inputS[i].onblur = function (){
           let idInput = this.id,
@@ -293,35 +288,28 @@ export class Controller {
             maxStart,
             step,
             scaleStep;
-console.log('idInput',idInput,this)
+
           if ( (idInput.indexOf('min',0) != -1) && (idInput.indexOf('minStart',0) == -1)){
-            //min = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMin+id).value);
             min = Number.parseInt(this.value);
-            console.log('300/',this,contr)
             clear(contr.thisSlider, id);
             contr.min = min;
             contr.view.min = min;
-            console.log('304/',contr)
           }
           if ( (idInput.indexOf('max',0) != -1) && (idInput.indexOf('maxStart',0) == -1)){
-            //max = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMax+id).value);
             max = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
             contr.max = max;
             contr.view.max = max;
           }
           if (idInput.indexOf('minStart',0) != -1){
-            //minStart = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMinStart+id).value);
             minStart = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
             if (minStart <= contr.maxStart){
               contr.minStart = minStart;
               contr.view.minStart = minStart;
             }
-            console.log('ww',minStart)
           }
           if (idInput.indexOf('maxStart',0) != -1){
-            //maxStart = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMaxStart+id).value);
             maxStart = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
             if (maxStart >= contr.minStart){
@@ -330,20 +318,18 @@ console.log('idInput',idInput,this)
             }
           }
           if (idInput.indexOf('scaleStep',0) != -1){
-            //scaleStep = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemScaleStep+id).value);
             scaleStep = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
             contr.scaleStep = scaleStep;
             contr.view.scaleStep = scaleStep;
           }
           if (idInput.indexOf('step',0) != -1){
-            //step = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemStep+id).value);
             step = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
             contr.step = step;
             contr.view.step = step;
           }
-          console.log('TEST',contr)
+          
           contr.checkMinMaxStart();
           contr.view.drawType();
           contr.view.drawScale();
@@ -356,28 +342,18 @@ console.log('idInput',idInput,this)
       }
 
       let radioS = contr.thisSlider.getElementsByClassName('radiogroup__input');
-      console.log(radioS)
       for(var i = 0; i < radioS.length; i++) {
         radioS[i].onclick = function (){
-          let id = contr.idElement.substr(-1);
-          console.log(id, this)
-          let configItemType = contr.model.configItemRadiobtn+`.radiogroup__input[name=rbGroopType${id}]:checked`,
-            configItemOrientation = contr.model.configItemRadiobtn+`.radiogroup__input[name=rbGroopOrientation${id}]:checked`,
-            configItemValue = contr.model.configItemRadiobtn+`.radiogroup__input[name=rbGroopValue${id}]:checked`,
-            configItemScale = contr.model.configItemRadiobtn+`.radiogroup__input[name=rbGroopScale${id}]:checked`;
-
-          let	idStr = this.name,
+          let id = contr.idElement.substr(-1),
+            idStr = this.name,
             type, orientation, value, scale,
             typeId, orientationID, valueID, scaleID;
-          console.log(idStr,idStr.indexOf('Scale',0));
           if (idStr.indexOf('Type',0) != -1){
             typeId = this.id.substr(-1);
-
             switch(typeId) {
               case '1': type = 'interval'; break;
                 case '2': {
                   type = 'from0to';
-                  console.log('test',this,contr)
                   contr.minStart = contr.min;
                   break;
                 }
@@ -390,7 +366,6 @@ console.log('idInput',idInput,this)
           }
           if (idStr.indexOf('Orientation',0) != -1){
             orientationID = this.id.substr(-1);
-
             switch(orientationID) {
               case '1': orientation = 'horizontal'; break;
                 case '2': orientation = 'vertical'; break;
@@ -402,7 +377,6 @@ console.log('idInput',idInput,this)
           }
           if (idStr.indexOf('Value',0) != -1){
             valueID = this.id.substr(-1);
-
             switch(valueID) {
               case '1': value = 'on'; break;
                 case '2': value = 'off'; break;
@@ -419,12 +393,11 @@ console.log('idInput',idInput,this)
                 case '2': scale = 'off'; break;
                 default : scale = 'on';
               }
-            console.log(this,contr.thisSlider)
             clear(contr.thisSlider, id);
             contr.scale = scale;
             contr.view.scale = scale;
           }
-          console.log('data:',contr.view);
+          
           contr.checkMinMaxStart();
           contr.view.drawType();
           contr.view.drawScale();
@@ -450,14 +423,9 @@ console.log('idInput',idInput,this)
   }
   
   checkMinMaxStart() : void{
-    console.log('checkMinMaxStart',this, this.view, this.model)
-    //if (this.minStart > this.maxStart){this.minStart = this.maxStart; this.view.minStart = this.maxStart;}
-    //if (this.maxStart < this.minStart){this.maxStart = this.minStart; this.view.maxStart = this.minStart;}
-    
     if (this.minStart < this.min){this.minStart = this.min; this.view.minStart = this.min;}
     if (this.maxStart > this.max){this.maxStart = this.max; this.view.maxStart = this.max;}
     if (this.minStart > this.max){this.minStart = this.max; this.view.minStart = this.max;}
-    console.log('checkMinMaxStart',this, this.view, this.model)
   }
 
   writeDataInConfig() : void{
@@ -492,7 +460,7 @@ console.log('idInput',idInput,this)
       case 'off': scaleID = '2'; break;
       default : scaleID = '1';
     }
-    //console.log('writeDataInConfig():',this.thisSlider,this.model.configItemMin+id)
+
     this.thisSlider.querySelector(this.model.configItemMin+id).value = this.min;
     this.thisSlider.querySelector(this.model.configItemMax+id).value = this.max;
     this.thisSlider.querySelector(this.model.configItemMinStart+id).value = this.minStart;
