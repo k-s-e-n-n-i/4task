@@ -30,9 +30,10 @@ export class View {
   }
 
   drawRange() : void{
+    //console.log('drawRange():',this.dataSlider)
     let posLeft : any, posRight : any;
   
-    posRight =  ( this.model.getWidth() / (this.max - this.min) ) * (this.maxStart - this.min);
+    posRight = ( this.model.getWidth() / (this.max - this.min) ) * (this.maxStart - this.min);
     this.model.getRangeRight().style.left = posRight +'px';
 
     switch(this.type) {
@@ -104,6 +105,7 @@ export class View {
   }
   
   drawScale() : void{
+    console.log('scale min',this.min)
     switch(this.scale) {
       case 'on' : {
         let scaleKol,

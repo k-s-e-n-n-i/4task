@@ -22,31 +22,14 @@ export class slider {
   public dataSlider : object = {};
   
   constructor(option){
-    /*this.element = option.element;
-    this.idElement =  option.idElement;
-    this.width = option.width;
-    this.type = option.type;
-    this.min = option.min | 0;
-    this.max = option.max | 1000;
-    this.minStart = option.minStart | 150;
-    this.maxStart = option.maxStart | 500;
-    this.step = option.step;
-    this.orientation = option.orientation;
-    this.value = option.value;
-    this.scale = option.scale;
-    this.scaleStep = option.scaleStep;
-    this.settings = option.settings;
-    console.log(option.minStart, this.minStart);*/
-
-    //console.log(option.minStart);
     this.dataSlider = {
       element : option.element,
       idElement : option.idElement,
-      width : option.width,
+      width : option.width || 400,
       type : option.type || 'interval',
       min : option.min || 0,
       max : option.max || 1000,
-      minStart : option.minStart || 150,
+      minStart : option.minStart || 0,
       maxStart : option.maxStart || 500,
       step : option.step || 1,
       orientation : option.orientation || 'horizontal',
@@ -55,13 +38,9 @@ export class slider {
       scaleStep : option.scaleStep ||10,
       settings : option.settings || 'on',
     };
-    //console.log(this.dataSlider);
-
   }
 
-  slider(option) {
-    
-    
+  slider(){
     /*let dataSlider = Object.assign({
       element : document.querySelector('.slider0'),
       idElement : 'idSlider0',
@@ -84,17 +63,24 @@ export class slider {
     const view = new View(this.dataSlider, model);
     const controller = new Controller(this.dataSlider, model, view);
 
-    //let thisSlider = this.dataSlider.element;
-    //console.log(model.getRangeLeft());
-    model.getRangeSlider().style.width = this.width;
-    controller.checkMinMaxStart();//определили текущие мин и мах
-    if (this.settings == 'on'){
+    model.getRangeSlider().style.width = this.dataSlider.width +'px';
+    
+    controller.checkMinMaxStart();
+  
+
+    
+    if (this.settings == 'on'){//?
+      console.log('this.settings1',this.settings)
       controller.writeDataInConfig();
+      console.log('this.settings2',this.settings)
     }
     view.drawRange();
+
     controller.moveRangeOnclickSlider();
     if (this.settings == 'on'){
+      console.log('this.settings3',this.settings)
       controller.applyConfig();
+      console.log('this.settings4',this.settings)
     }
     model.getRangeLeft().onmousedown = function(e) {
       controller.moveAt(model.getRangeLeft(), e, 'left');

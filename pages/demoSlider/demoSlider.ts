@@ -9,7 +9,7 @@ const slider_1 = new slider({
   type : 'interval',
   min : 10,
   max : 200,
-  minStart : 50,
+  minStart : 0,
   maxStart : 100,
   step : 20,
   orientation : 'horizontal',
@@ -66,6 +66,7 @@ slider_4.slider();
 const slider_5 = new slider({
   element : document.querySelector('.slider .slider1'),
   idElement : 'idSlider1',
-  settings : 'on'
+  settings : 'on',
+  minStart : 200,
 });
 slider_5.slider();
