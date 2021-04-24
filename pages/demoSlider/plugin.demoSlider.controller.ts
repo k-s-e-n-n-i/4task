@@ -285,7 +285,7 @@ export class Controller {
       console.log(inputS)
       for(var i = 0; i < inputS.length; i++) {
         inputS[i].onblur = function (){
-          let idCheckbox = this.id,
+          let idInput = this.id,
             id = contr.idElement.substr(-1),
             min,
             max,
@@ -293,49 +293,55 @@ export class Controller {
             maxStart,
             step,
             scaleStep;
-
-          if (idCheckbox.indexOf('min',0) != -1){
+console.log('idInput',idInput,this)
+          if ( (idInput.indexOf('min',0) != -1) && (idInput.indexOf('minStart',0) == -1)){
             //min = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMin+id).value);
             min = Number.parseInt(this.value);
-            console.log(this,contr.thisSlider.querySelector(contr.model.configItemMin+id))
+            console.log('300/',this,contr)
             clear(contr.thisSlider, id);
             contr.min = min;
             contr.view.min = min;
-            console.log(contr)
+            console.log('304/',contr)
           }
-          if (idCheckbox.indexOf('max',0) != -1){
+          if ( (idInput.indexOf('max',0) != -1) && (idInput.indexOf('maxStart',0) == -1)){
             //max = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMax+id).value);
             max = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
             contr.max = max;
             contr.view.max = max;
           }
-          if (idCheckbox.indexOf('minStart',0) != -1){
+          if (idInput.indexOf('minStart',0) != -1){
             //minStart = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMinStart+id).value);
             minStart = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
-            contr.minStart = minStart;
-            contr.view.minStart = minStart;
+            if (minStart <= contr.maxStart){
+              contr.minStart = minStart;
+              contr.view.minStart = minStart;
+            }
+            console.log('ww',minStart)
           }
-          if (idCheckbox.indexOf('maxStart',0) != -1){
+          if (idInput.indexOf('maxStart',0) != -1){
             //maxStart = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemMaxStart+id).value);
             maxStart = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
-            contr.maxStart = maxStart;
-            contr.view.maxStart = maxStart;
+            if (maxStart >= contr.minStart){
+              contr.maxStart = maxStart;
+              contr.view.maxStart = maxStart;
+            }
           }
-          if (idCheckbox.indexOf('scaleStep',0) != -1){
+          if (idInput.indexOf('scaleStep',0) != -1){
             //scaleStep = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemScaleStep+id).value);
             scaleStep = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
             contr.scaleStep = scaleStep;
             contr.view.scaleStep = scaleStep;
           }
-          if (idCheckbox.indexOf('step',0) != -1){
+          if (idInput.indexOf('step',0) != -1){
             //step = Number.parseInt(contr.thisSlider.querySelector(contr.model.configItemStep+id).value);
             step = Number.parseInt(this.value);
             clear(contr.thisSlider, id);
-            this.step = step;
+            contr.step = step;
+            contr.view.step = step;
           }
           console.log('TEST',contr)
           contr.checkMinMaxStart();
@@ -444,9 +450,14 @@ export class Controller {
   }
   
   checkMinMaxStart() : void{
+    console.log('checkMinMaxStart',this, this.view, this.model)
+    //if (this.minStart > this.maxStart){this.minStart = this.maxStart; this.view.minStart = this.maxStart;}
+    //if (this.maxStart < this.minStart){this.maxStart = this.minStart; this.view.maxStart = this.minStart;}
+    
     if (this.minStart < this.min){this.minStart = this.min; this.view.minStart = this.min;}
     if (this.maxStart > this.max){this.maxStart = this.max; this.view.maxStart = this.max;}
     if (this.minStart > this.max){this.minStart = this.max; this.view.minStart = this.max;}
+    console.log('checkMinMaxStart',this, this.view, this.model)
   }
 
   writeDataInConfig() : void{
