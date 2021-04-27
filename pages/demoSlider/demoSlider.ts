@@ -21,7 +21,7 @@ $(function() {
     minStart : 5,
     maxStart : 7,
     step : 5,
-    orientation : 'horizontal',//'vertical',
+    orientation : 'horizontal',
     value : 'on',
     scale : 'off',
     scaleStep : 10,

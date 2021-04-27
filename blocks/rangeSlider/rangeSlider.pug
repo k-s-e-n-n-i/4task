@@ -1,6 +1,4 @@
 mixin rangeSlider(obj)
-  
-  
   div(class="range-slider" id= obj.id)
     div.range-slider__topic-label
       h3= obj.topic
@@ -15,8 +13,3 @@ mixin rangeSlider(obj)
       div.range-slider__right
     if obj.postText != ""
       p.range-slider__postText Стоимость за сутки пребывания в номере
-  //+sliderConfig(
-      {
-        id : obj.id
-      }
-      )

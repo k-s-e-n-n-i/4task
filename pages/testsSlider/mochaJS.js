@@ -1,2 +1,4 @@
+import 'mocha';
 mocha.setup('bdd');
-let assert = chai.assert;
+import 'chai';
+

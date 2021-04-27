@@ -179,7 +179,7 @@ export class Controller {
     if (val > this.max){val = this.max;}
     this.thisSlider.querySelector(`.slider-config .slider-config__block .input-text #inputTextmaxStart`+this.idElement.substr(-1)).value = val;
   }
-        
+
   moveRangeOnclickSlider() : void{
     let thisClick : object = this.thisSlider.querySelector('.range-slider__slider'),
       contr : object = this;
@@ -244,6 +244,7 @@ export class Controller {
       lenR : number;
 
     masScale = this.masStepsForMoving();
+
     for (let i = 0; i < masScale.length; i++){
       lenL = Math.abs(masScale[i] - pos);
       lenR = Math.abs(masScale[i+1] - pos);
