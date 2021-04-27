@@ -43,14 +43,11 @@ export class Model {
     return this.thisSlider.querySelector('.range-slider__label-max');
   }
 
-  masScaleStep : number[] = []
   configItemMin : string = `.slider-config .slider-config__block .input-text #inputTextmin`
   configItemMax : string = `.slider-config .slider-config__block .input-text #inputTextmax`
   configItemMinStart : string = `.slider-config .slider-config__block .input-text #inputTextminStart`
   configItemMaxStart : string = `.slider-config .slider-config__block .input-text #inputTextmaxStart`
   configItemStep : string = `.slider-config .slider-config__block .input-text #inputTextstep`
   configItemScaleStep : string = `.slider-config .slider-config__block .input-text #inputTextscaleStep`
-  configItemRadiobtn : string = `.slider-config .slider-config__block .slider-config__block-items
-        .slider-config__option .radiogroup `
   heightBlockSlider : string = '80px'
 }

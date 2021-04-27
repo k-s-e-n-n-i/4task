@@ -10,5 +10,3 @@ import '/blocks/rangeSlider/rangeSlider.scss'
 
 /*plugin slider*/
 import '/pages/demoSlider/demoSlider.scss'
-//import '/blocks/demoSlider/demoSlider_tests.js'
-//mocha.run();//вместе с demoSlider_tests.js
