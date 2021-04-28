@@ -3,29 +3,46 @@ import $ from 'jquery'
 import '/pages/demoSlider/plugin.demoSlider.ts';
 import '/pages/testsSlider/tests.ts'
 
+
 $(function() {
-  let obj = {
-    element : object = document.querySelector('.slider1'),
-    idElement : string = 'idSlider1',
-    width : number = 400,
-    type : string = 'interval',
-    min : number = 10,
-    max : number = 200,
-    minStart : number = 50,
-    maxStart : number = 100,
-    step : number = 1,
-    orientation : string = 'horizontal',
-    value : string = 'on',
-    scale : string = 'on',
-    scaleStep : number = 20
+  interface dataSlider{
+    element : object,
+    idElement : string,
+    width : number,
+    type : string,
+    min : number,
+    max : number,
+    minStart : number,
+    maxStart : number,
+    step : number,
+    orientation : string,
+    value : string,
+    scale : string,
+    scaleStep : number,
+  };
+  let obj : dataSlider = {
+    element : document.querySelector('.slider1'),
+    idElement : 'idSlider1',
+    width : 400,
+    type : 'interval',
+    min : 10,
+    max : 200,
+    minStart : 50,
+    maxStart : 100,
+    step : 1,
+    orientation : 'horizontal',
+    value : 'on',
+    scale : 'on',
+    scaleStep : 20
   };
   $('.slider').slider(obj);
 
-  let obj2 = $.extend(obj,{
-    element : object = document.querySelector('.slider2'),
-    idElement : string = 'idSlider2',
-    step : number = 20,
-  });
+  let objAddStep : dataSlider = {
+    element : document.querySelector('.slider2'),
+    idElement : 'idSlider2',
+    step : 20,
+  }
+  let obj2 = $.extend(obj, objAddStep);
   $('.slider').slider(obj2);
 
   mocha.run();

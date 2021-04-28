@@ -12,20 +12,35 @@ import {testsController} from '/pages/testsSlider/tests.controller.ts'
 import {testsControllerStep} from '/pages/testsSlider/tests.controller.methodsWithStep.ts'
 
 $(function() {
-  let obj : object = {
-    element : object = document.querySelector('.slider1'),
-    idElement : string = 'idSlider1',
-    width : number = 400,
-    type : string = 'interval',
-    min : number = 10,
-    max : number = 200,
-    minStart : number = 50,
-    maxStart : number = 100,
-    step : number = 1,
-    orientation : string = 'horizontal',
-    value : string = 'on',
-    scale : string = 'on',
-    scaleStep : number = 20
+  interface dataSlider{
+    element : object,
+    idElement : string,
+    width : number,
+    type : string,
+    min : number,
+    max : number,
+    minStart : number,
+    maxStart : number,
+    step : number,
+    orientation : string,
+    value : string,
+    scale : string,
+    scaleStep : number,
+  };
+  let obj : dataSlider = {
+    element : document.querySelector('.slider1'),
+    idElement : 'idSlider1',
+    width : 400,
+    type : 'interval',
+    min : 10,
+    max : 200,
+    minStart : 50,
+    maxStart : 100,
+    step : 1,
+    orientation : 'horizontal',
+    value : 'on',
+    scale : 'on',
+    scaleStep : 20
   };
 
   //-------------------------------------------Model---
@@ -41,15 +56,16 @@ $(function() {
   testsController(obj, modelTest, contrTest, assert);
 
   //-------------------------------------------Controller---слайдер с шагом---
-  let obj2 = Object.assign({}, obj, {
-    element : object = document.querySelector('.slider2'),
-    idElement : string = 'idSlider2',
-    step : number = 20,
-  });
+  let objAddStep : dataSlider = {
+    element : document.querySelector('.slider2'),
+    idElement : 'idSlider2',
+    step : 20,
+  }
+  let obj2 = $.extend(obj, objAddStep);
 
   const modelTest2 = new Model(obj2);
   const viewTest2 = new View(obj2, modelTest2);
   const contrTest2 = new Controller(obj2, modelTest2, viewTest2);
 
-  testsControllerStep(obj2, modelTest2, contrTest2, assert);
+  testsControllerStep(obj2, contrTest2, assert);
 });

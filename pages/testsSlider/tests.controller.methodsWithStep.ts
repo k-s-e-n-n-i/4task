@@ -3,7 +3,7 @@ import $ from "jquery"
 import '/pages/demoSlider/plugin.demoSlider.ts';
 
 
-export function testsControllerStep(obj, modelTest, contrTest, assert){
+export function testsControllerStep(obj, contrTest, assert){
   describe("12. Ближайшая к клику позиция.", function() {
     it("controller.definePosStepClosestClick: ", function() {
       assert.equal(contrTest.definePosStepClosestClick(200), 204.73684210526315);
