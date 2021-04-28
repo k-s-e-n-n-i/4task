@@ -48,7 +48,7 @@ import {Controller} from '/pages/demoSlider/plugin.demoSlider.controller.ts';
         const view = new View(this.dataSlider, model);
         const controller = new Controller(this.dataSlider, model, view);
     
-        model.getRangeSlider().style.width = this.dataSlider.width +'px';
+        model.rangeSlider.style.width = this.dataSlider.width +'px';
         
         controller.checkMinMaxStart();
         if (this.settings == 'on'){
@@ -61,11 +61,11 @@ import {Controller} from '/pages/demoSlider/plugin.demoSlider.controller.ts';
           controller.applyConfig();
         }
     
-        model.getRangeLeft().onmousedown = function(e) {
-          controller.moveAt(model.getRangeLeft(), e, 'left');
+        model.rangeLeft.onmousedown = function(e) {
+          controller.moveAt(model.rangeLeft, e, 'left');
         };
-        model.getRangeRight().onmousedown = function(e) {
-          controller.moveAt(model.getRangeRight(), e, 'right');
+        model.rangeRight.onmousedown = function(e) {
+          controller.moveAt(model.rangeRight, e, 'right');
         };
     
         view.drawType();

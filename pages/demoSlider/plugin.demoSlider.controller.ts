@@ -48,13 +48,13 @@ export class Controller {
       widthRange : number = this.model.getWidthRange();
     switch(side){//чтобы сверху был ползунок, который перемещали последним (если друг на друга наедут)
       case 'left' : {
-        this.model.getRangeLeft().style.zindex = 15;
-        this.model.getRangeRight().style.zindex = 10;
+        this.model.rangeLeft.style.zindex = 15;
+        this.model.rangeRight.style.zindex = 10;
         break;
       }
       case 'right' : {
-        this.model.getRangeRight().style.zindex = 15;
-        this.model.getRangeLeft().style.zindex = 10;
+        this.model.rangeRight.style.zindex = 15;
+        this.model.rangeLeft.style.zindex = 10;
         break;
       }
     }
@@ -67,11 +67,11 @@ export class Controller {
       switch(contr.defineOrientation(contr.orientation)) {
         case 'x': {
           if (contr.step == 1){
-            pos = e.pageX - parseInt(contr.model.getSlider().offsetLeft);
+            pos = e.pageX - parseInt(contr.model.slider.offsetLeft);
             contr.movingRange(side, startPos, pos, widthRange);
           }else{
             masScale = contr.masStepsForMoving();
-            tempPos = e.pageX - parseInt(contr.model.getSlider().offsetLeft);
+            tempPos = e.pageX - parseInt(contr.model.slider.offsetLeft);
             if (masScale.indexOf(tempPos) != -1){
               pos = tempPos;
               contr.movingRange(side, startPos, pos, widthRange);
@@ -83,11 +83,11 @@ export class Controller {
         }
         case 'y': {
           if (contr.step == 1){
-            pos = e.pageY - contr.getCoords(contr.model.getSlider()).top;
+            pos = e.pageY - contr.getCoords(contr.model.slider).top;
             contr.movingRange(side, startPos, pos, widthRange);
           }else{
             masScale = contr.masStepsForMoving();
-            tempPos = e.pageY - contr.getCoords(contr.model.getSlider()).top;
+            tempPos = e.pageY - contr.getCoords(contr.model.slider).top;
             if (masScale.indexOf(tempPos) != -1){
               pos = tempPos;
               contr.movingRange(side, startPos, pos, widthRange);
@@ -122,15 +122,15 @@ export class Controller {
         if ((this.model.getPosRangeRight() >= pos)&&(this.type != 'from0to')){
           step = startPos - pos;//длина перемещения левого указателя	
           price = calcValue(pos, this);
-          this.model.getRangeLeft().style.left = pos+'px';//позиция указателей
-          this.model.getRange().style.transform = 'translate('+pos+'px, 0px)';
+          this.model.rangeLeft.style.left = pos+'px';//позиция указателей
+          this.model.range.style.transform = 'translate('+pos+'px, 0px)';
           startPos = pos;
           this.drawValueMin(price);
           if (this.settings == 'on'){
             this.changeConfigInputMin(price);
           }
           this.writeDataSliderMin(price);
-          this.model.getRange().style.width = widthRange + step +'px';
+          this.model.range.style.width = widthRange + step +'px';
         }
       }
 
@@ -138,13 +138,13 @@ export class Controller {
         if (this.model.getPosRangeLeft() <= pos){
           step = pos - startPos;//длина перемещения правого указателя
           price = calcValue(pos, this);
-          this.model.getRangeRight().style.left = pos+'px';//позиция указателей
+          this.model.rangeRight.style.left = pos+'px';//позиция указателей
           this.drawValueMax(price);
           if (this.settings == 'on'){
             this.changeConfigInputMax(price);
           }
           this.writeDataSliderMax(price);
-          this.model.getRange().style.width = widthRange + step +'px';
+          this.model.range.style.width = widthRange + step +'px';
         }
       }
     }
@@ -156,10 +156,10 @@ export class Controller {
   }
 
   drawValueMin(val : number) : void{
-    this.model.getElemValueMin(this.thisSlider).innerHTML = val;
+    this.model.elemValueMin.innerHTML = val;
   }
   drawValueMax(val : number) : void{
-    this.model.getElemValueMax(this.thisSlider).innerHTML = val;
+    this.model.elemValueMax.innerHTML = val;
   }
 
   writeDataSliderMin(val : number) : void{
@@ -181,7 +181,7 @@ export class Controller {
   }
 
   moveRangeOnclickSlider() : void{
-    let thisClick : object = this.thisSlider.querySelector('.range-slider__slider'),
+    let thisClick : object = this.model.slider,
       contr : object = this;
     
     thisClick.onmousedown = function(e) {	
@@ -191,14 +191,14 @@ export class Controller {
 
         switch(contr.defineOrientation(contr.orientation)) {
           case 'x': {
-            pos = e.pageX - parseInt(contr.model.getSlider().offsetLeft);
+            pos = e.pageX - parseInt(contr.model.slider.offsetLeft);
             if (contr.step != 1){
               pos = contr.definePosStepClosestClick(pos);
             }
             break;
           }
           case 'y': {
-            pos = e.pageY - contr.getCoords(contr.model.getSlider()).top;
+            pos = e.pageY - contr.getCoords(contr.model.slider).top;
             if (contr.step != 1){
               pos = contr.definePosStepClosestClick(pos);
             }
@@ -274,14 +274,14 @@ export class Controller {
   }
   
   applyConfig() : void{
-    let thisClick : object = this.thisSlider.querySelector('.slider-config .checkbox-list__input'),
+    let thisClick : object = this.model.checkboxSettings,
       contr : object = this;
 
     thisClick.onclick = function(e) {
       if (thisClick.checked == true){
-        contr.thisSlider.querySelector('.slider-config .slider-config__block').style.display = 'block';
+        contr.model.settingsBlock.style.display = 'block';
       }else{
-        contr.thisSlider.querySelector('.slider-config .slider-config__block').style.display = 'none';
+        contr.model.settingsBlock.style.display = 'none';
       }
 
       let inputS : object = contr.thisSlider.getElementsByClassName('input-text__input');
@@ -443,8 +443,8 @@ export class Controller {
   }
 
   writeDataInConfig() : void{
-    this.model.getRangeSlider().querySelector('.range-slider__label-min').innerHTML = this.minStart;
-    this.model.getRangeSlider().querySelector('.range-slider__label-max').innerHTML = this.maxStart;
+    this.model.elemValueMin.innerHTML = this.minStart;
+    this.model.elemValueMax.innerHTML = this.maxStart;
     
     let typeID : string, 
       orientationID : string, 
@@ -478,12 +478,19 @@ export class Controller {
       default : scaleID = '1';
     }
 
-    this.thisSlider.querySelector(this.model.configItemMin+id).value = this.min;
-    this.thisSlider.querySelector(this.model.configItemMax+id).value = this.max;
-    this.thisSlider.querySelector(this.model.configItemMinStart+id).value = this.minStart;
-    this.thisSlider.querySelector(this.model.configItemMaxStart+id).value = this.maxStart;
-    this.thisSlider.querySelector(this.model.configItemStep +id).value = this.step;
-    this.thisSlider.querySelector(this.model.configItemScaleStep +id).value = this.scaleStep;
+    let configItemMin : string = `.slider-config .slider-config__block .input-text #inputTextmin`,
+    configItemMax : string = `.slider-config .slider-config__block .input-text #inputTextmax`,
+    configItemMinStart : string = `.slider-config .slider-config__block .input-text #inputTextminStart`,
+    configItemMaxStart : string = `.slider-config .slider-config__block .input-text #inputTextmaxStart`,
+    configItemStep : string = `.slider-config .slider-config__block .input-text #inputTextstep`,
+    configItemScaleStep : string = `.slider-config .slider-config__block .input-text #inputTextscaleStep`;
+
+    this.thisSlider.querySelector(configItemMin+id).value = this.min;
+    this.thisSlider.querySelector(configItemMax+id).value = this.max;
+    this.thisSlider.querySelector(configItemMinStart+id).value = this.minStart;
+    this.thisSlider.querySelector(configItemMaxStart+id).value = this.maxStart;
+    this.thisSlider.querySelector(configItemStep +id).value = this.step;
+    this.thisSlider.querySelector(configItemScaleStep +id).value = this.scaleStep;
     this.thisSlider.querySelector(`.radiogroup__input[name=rbGroopType${id}]#rbrbGroopType${id}${id}${typeID}`).checked = true;
     this.thisSlider.querySelector(`.radiogroup__input[name=rbGroopOrientation${id}]#rbrbGroopOrientation${id}${id}${orientationID}`).checked = true;
     this.thisSlider.querySelector(`.radiogroup__input[name=rbGroopValue${id}]#rbrbGroopValue${id}${id}${valueID}`).checked = true;

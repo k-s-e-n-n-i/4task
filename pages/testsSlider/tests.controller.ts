@@ -14,7 +14,7 @@ export function testsController(obj, modelTest, contrTest, assert){
 
   describe("3. Определение позиции элемента. [? получаю одинаковые массивы, но не засчитываются за равные ? (в консоли)]", function() {
     it("Controller.getCoords: ", function() {
-      assert.equal(contrTest.getCoords(modelTest.getRangeLeft()), {
+      assert.equal(contrTest.getCoords(modelTest.rangeLeft), {
         top : document.querySelector('.slider1 .range-slider#idSlider1 .range-slider__slider .range-slider__left').getBoundingClientRect().top +pageYOffset, 
         left : document.querySelector('.slider1 .range-slider#idSlider1 .range-slider__slider .range-slider__left').getBoundingClientRect().left,
       });

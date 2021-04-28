@@ -3,51 +3,50 @@ import $ from "jquery"
 export class Model {
   thisSlider : any;
   idElement : string;
+  rangeSlider : object;
+  slider : object;
+  range : object;
+  rangeLeft : object;
+  rangeRight : object;
+  elemValueMin : object;
+  elemValueMax : object;
+  checkboxSettings : object;
+  settingsBlock : object;
+  labelBlock : object;
+  labelMin : object;
+  labelDash : object;
+  labelMax : object;
+  blockScaleVals : object;
 
   constructor(option : object){
     this.thisSlider = option.element;
     this.idElement = option.idElement;
+    this.rangeSlider = this.thisSlider.querySelector('.range-slider#'+this.idElement);
+    this.slider = this.rangeSlider.querySelector('.range-slider__slider');
+    this.range = this.slider.querySelector('.range-slider__range');
+    this.rangeLeft = this.slider.querySelector('.range-slider__left');
+    this.rangeRight = this.slider.querySelector('.range-slider__right');
+    this.elemValueMin = this.thisSlider.querySelector('.range-slider__label-min');
+    this.elemValueMax = this.thisSlider.querySelector('.range-slider__label-max');
+    this.checkboxSettings = this.thisSlider.querySelector('.slider-config .checkbox-list__input');
+    this.settingsBlock = this.thisSlider.querySelector('.slider-config .slider-config__block');
+    this.labelBlock = this.rangeSlider.querySelector('.range-slider__label-block');
+    this.labelMin = this.rangeSlider.querySelector('span.range-slider__label-min');
+    this.labelDash = this.rangeSlider.querySelector('span.range-slider__label-min');
+    this.labelMax = this.rangeSlider.querySelector('span.range-slider__label-max');
+    this.blockScaleVals = this.slider.querySelectorAll('.range-slider__scale-val');
   }
 
   getWidth() : number{
-    return this.thisSlider.querySelector('.range-slider#'+this.idElement+' .range-slider__slider').clientWidth;
-  }
-  getRangeSlider() : any{
-    return this.thisSlider.querySelector('.range-slider#'+this.idElement);
-  }
-  getSlider() : any{ 
-    return this.getRangeSlider().querySelector('.range-slider__slider');
-  }
-  getRange() : any{ 
-    return this.getSlider().querySelector('.range-slider__range');
+    return this.slider.clientWidth;
   }
   getWidthRange() : number{
-    return this.getRange().clientWidth;
-  }
-  getRangeLeft() : any{ 
-    return this.getSlider().querySelector('.range-slider__left');
+    return this.range.clientWidth;
   }
   getPosRangeLeft() : number{
-    return parseInt(getComputedStyle(this.getRangeLeft()).left);
-  }
-  getRangeRight() : any{ 
-    return this.getSlider().querySelector('.range-slider__right');
+    return parseInt(getComputedStyle(this.rangeLeft).left);
   }
   getPosRangeRight() : number{
-    return parseInt(getComputedStyle(this.getRangeRight()).left);
+    return parseInt(getComputedStyle(this.rangeRight).left);
   }
-  getElemValueMin() : any{
-    return this.thisSlider.querySelector('.range-slider__label-min');
-  }
-  getElemValueMax() : any{
-    return this.thisSlider.querySelector('.range-slider__label-max');
-  }
-
-  configItemMin : string = `.slider-config .slider-config__block .input-text #inputTextmin`
-  configItemMax : string = `.slider-config .slider-config__block .input-text #inputTextmax`
-  configItemMinStart : string = `.slider-config .slider-config__block .input-text #inputTextminStart`
-  configItemMaxStart : string = `.slider-config .slider-config__block .input-text #inputTextmaxStart`
-  configItemStep : string = `.slider-config .slider-config__block .input-text #inputTextstep`
-  configItemScaleStep : string = `.slider-config .slider-config__block .input-text #inputTextscaleStep`
-  heightBlockSlider : string = '80px'
 }
