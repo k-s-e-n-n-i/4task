@@ -1,9 +1,7 @@
-import "/project/jquery.global.js";
-import $ from 'jquery'
-import '/pages/demoSlider/plugin.demoSlider.ts';
+import '../modules/plugin.slider/plugin.slider.ts';
 
 $(function() {
-
+  
   $('.slider').slider({
     element : document.querySelector('.slider .slider1'),
     idElement : 'idSlider1',
@@ -68,4 +66,5 @@ $(function() {
     scale : 'on',
     settings : 'on'
   });
+
 });
