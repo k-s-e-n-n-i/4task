@@ -1,14 +1,7 @@
-html(lang="ru")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title Document
-    meta(keywords="keywords", description="description")
-    link(rel="shortcut icon" href=require("@/favicon.svg").default type="image/svg")
+extends ~@Blocks/layout/layout.pug
 
-  body  
+block links
+  link(rel="stylesheet" type="text/css" href="./css/page-demo-sliders.js.css")
 
-    include ~@/page-demo-sliders/page-demo-sliders.pug
-    
-    script(src="./index.js")
+block content
+  include ~@/page-demo-sliders/page-demo-sliders.pug
