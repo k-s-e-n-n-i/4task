@@ -1,11 +1,15 @@
-.input-text{
+.input-text {
   position: relative;
   width: 100%;
 
-  &.input-text_subscription{
+  &_subscription {
     margin-top: 10px;
-  
-    &:after{
+
+    .input-text__input {
+      letter-spacing: 0;
+    }
+
+    &:after {
       content: '';
       width: 20px;
       height: 20px;
@@ -14,47 +18,35 @@
       bottom: 11px;
       right: 11px;
       background-repeat: no-repeat;
-      background-image: url('@Blocks/input-text/arrow.svg');
+      background-image: url('@Blocks/input-text/img/arrow.svg');
     }
   }
 
-  .input-text__input{
+  &__input {
     width: 100%;
-    color: rgba(31, 32, 65, 0.25);
+    color: rgba(31, 32, 65, 1);
     outline: none;
-    font-size: 14px;
+    font-size: 13px;
     border: 1px solid rgba(31, 32, 65, 0.25);
     box-sizing: border-box;
     border-radius: 4px;
-    height: 44px;
-    padding: 8px 14px;
-    margin-top: 5px;
-    font-family: Montserrat, Arial, sans-serif;
+    padding: 12.8px 14px;
+    font-family: 'Montserrat', Arial, sans-serif;
     font-weight: normal;
-    font-style: normal;    
+    font-style: normal;
+    letter-spacing: 0.5px;
 
     &:hover,
-    &.input-text__input_hover{
+    &:focus,
+    &.input-text__input_hover {
       color: rgba(31, 32, 65, 0.75);
       border: 1px solid rgba(31, 32, 65, 0.5);
-      font-weight: bold;
-    }
-    &:focus{
-      color: rgba(31, 32, 65, 0.75);
-      border: 1px solid rgba(31, 32, 65, 0.5);
+      font-weight: 600;
+      letter-spacing: 0.1px;
     }
   }
 
-  ::-webkit-input-placeholder { /* Chrome */
-    color: rgba(31, 32, 65, 0.25);
-  }
-  :-ms-input-placeholder { /* IE 10+ */
-    color: rgba(31, 32, 65, 0.25);
-  }
-  ::-moz-placeholder { /* Firefox 19+ */
-    color: rgba(31, 32, 65, 0.25);
-  }
-  :-moz-placeholder { /* Firefox 4 - 18 */
+  ::placeholder {
     color: rgba(31, 32, 65, 0.25);
   }
 }
