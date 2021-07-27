@@ -1,28 +1,27 @@
-import $ from "jquery"
-import {Options} from '../../modules/plugin.slider/plugin.slider';
+import { Options } from '../../modules/plugin.slider/plugin.slider';
 
 export class Model {
-  thisSlider : HTMLElement;
-  idElement : string;
-  rangeSlider : HTMLElement;
-  slider : HTMLElement;
-  range : HTMLElement;
-  rangeLeft : HTMLElement;
-  rangeRight : HTMLElement;
-  elemValueMin : object;
-  elemValueMax : object;
-  checkboxSettings : object;
-  settingsBlock : object;
-  labelBlock : object;
-  labelMin : object;
-  labelDash : object;
-  labelMax : object;
-  blockScaleVals : object;
+  thisSlider: HTMLElement;
+  idElement: string;
+  rangeSlider: HTMLElement;
+  slider: HTMLElement;
+  range: HTMLElement;
+  rangeLeft: HTMLElement;
+  rangeRight: HTMLElement;
+  elemValueMin: object;
+  elemValueMax: object;
+  checkboxSettings: object;
+  settingsBlock: object;
+  labelBlock: object;
+  labelMin: object;
+  labelDash: object;
+  labelMax: object;
+  blockScaleVals: object;
 
-  constructor(option : Options){
+  constructor(option: Options) {
     this.thisSlider = option.element;
     this.idElement = option.idElement;
-    this.rangeSlider = this.thisSlider.querySelector('.range-slider#'+this.idElement);
+    this.rangeSlider = this.thisSlider.querySelector('.range-slider#' + this.idElement);
     this.slider = this.rangeSlider.querySelector('.range-slider__slider');
     this.range = this.slider.querySelector('.range-slider__range');
     this.rangeLeft = this.slider.querySelector('.range-slider__left');
@@ -38,16 +37,16 @@ export class Model {
     this.blockScaleVals = this.slider.querySelectorAll('.range-slider__scale-val');
   }
 
-  getWidth() : number{
+  getWidth(): number {
     return this.slider.clientWidth;
   }
-  getWidthRange() : number{
+  getWidthRange(): number {
     return this.range.clientWidth;
   }
-  getPosRangeLeft() : number{
+  getPosRangeLeft(): number {
     return parseInt(getComputedStyle(this.rangeLeft).left);
   }
-  getPosRangeRight() : number{
+  getPosRangeRight(): number {
     return parseInt(getComputedStyle(this.rangeRight).left);
   }
 }
