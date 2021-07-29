@@ -2,6 +2,7 @@ import '@Blocks/checkbox-list/checkbox-list.scss';
 import '@Blocks/input-text/input-text.scss';
 import '@Blocks/radiogroup/radiogroup.scss';
 import '@Blocks/range-slider/range-slider.scss';
+import '@Blocks/slider-config/slider-config.scss';
 import '@Blocks/topic-label/topic-label.scss';
 import '@/page-demo-sliders/page-demo-sliders.scss';
 

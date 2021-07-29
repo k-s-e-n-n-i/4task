@@ -1,0 +1,26 @@
+.slider-config {
+  min-width: 400px;
+  width: 100%;
+
+  &__block {
+    display: none;
+  }
+
+  &__block-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__option {
+    margin: 10px;
+    width: 120px;
+  }
+
+  &__option_wide {
+    width: 210px;
+  }
+
+  &__option-item {
+    margin: 5px 0 15px 0;
+  }
+}
