@@ -1,0 +1,29 @@
+extends ~@Blocks/layout/layout.pug
+include ~@Blocks/range-slider/range-slider.pug
+include ~@Blocks/slider-config/slider-config.pug
+
+block links
+  link(rel="stylesheet" type="text/css" href="./css/tests-slider.js.css")
+  script(src="./js/mochaJS.js")
+  //script(src="/pages/tests-slider/chai.js")
+
+block content
+  .slider
+    .slider__item.slider1
+      +rangeSlider(
+        {
+          topic : "Обычный, диапазон",
+          id : "idSlider1",
+        }
+      )
+
+    .slider__item.slider2
+      +rangeSlider(
+        {
+          topic : "С шагом, от начала до Х",
+          id : "idSlider2",
+        }
+      )
+
+  div(id="mocha")
+  script(src="./js/tests-slider.js")
