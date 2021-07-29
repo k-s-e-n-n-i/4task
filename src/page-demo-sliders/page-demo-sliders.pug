@@ -2,9 +2,9 @@ include ~@Blocks/range-slider/range-slider.pug
 include ~@Blocks/slider-config/slider-config.pug
 
 
-div.slider
+.slider
 
-  div.slider__item.slider1
+  .slider__item.slider1
     +rangeSlider(
       {
         topic : "Обычный, диапазон",
@@ -13,7 +13,7 @@ div.slider
     )
     +sliderConfig({ id : "1" })
 
-  div.slider__item.slider2
+  .slider__item.slider2
     +rangeSlider(
       {
         topic : "С шагом, от начала до Х",
@@ -22,7 +22,7 @@ div.slider
     )
     +sliderConfig({ id : "2" })
 
-  div.slider__item.slider3
+  .slider__item.slider3
     +rangeSlider(
       {
         topic : "Обычный, единичное значение",
@@ -31,7 +31,7 @@ div.slider
     )
     +sliderConfig({ id : "3" })
 
-  div.slider__item.slider4
+  .slider__item.slider4
     +rangeSlider(
       {
         topic : "С шагом, диапазон",
@@ -40,7 +40,7 @@ div.slider
     )
     +sliderConfig({ id : "4" })
 
-  div.slider__item.slider5
+  .slider__item.slider5
     +rangeSlider(
       {
         topic : "Обычный, от начала до Х",

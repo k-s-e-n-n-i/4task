@@ -5,7 +5,7 @@ include ~@Blocks/checkbox-list/checkbox-list.pug
 
 
 mixin sliderConfig({ id })
-  div.slider-config
+  .slider-config
     +checkboxList(
       {
         items : [
@@ -17,11 +17,11 @@ mixin sliderConfig({ id })
       }
     )
 
-    div.slider-config__block
-      div.slider-config__block-items
-        div.slider-config__option
+    .slider-config__block
+      .slider-config__block-items
+        .slider-config__option
           h2 Шкала
-          div.slider-config__option-item
+          .slider-config__option-item
             +radiogroup(
               {
                 nameGroup : "rbGroopScale"+id,
@@ -37,7 +37,7 @@ mixin sliderConfig({ id })
                 ]
               }
             )
-          div.slider-config__option-item
+          .slider-config__option-item
             +inputText(
               {
                 topic : "Кол-во делений",
@@ -45,7 +45,7 @@ mixin sliderConfig({ id })
                 id : "scaleStep"+id,
               }
             )
-          div.slider-config__option-item
+          .slider-config__option-item
             +inputText(
               {
                 topic : "Шаг",
@@ -54,8 +54,8 @@ mixin sliderConfig({ id })
               }
             )
 
-        div.slider-config__option
-          div.slider-config__option-item
+        .slider-config__option
+          .slider-config__option-item
             +inputText(
               {
                 topic : "min",
@@ -63,7 +63,7 @@ mixin sliderConfig({ id })
                 id : "min"+id,
               }
             )
-          div.slider-config__option-item
+          .slider-config__option-item
             +inputText(
               {
                 topic : "max",
@@ -72,8 +72,8 @@ mixin sliderConfig({ id })
               }
             )
 
-        div.slider-config__option
-          div.slider-config__option-item
+        .slider-config__option
+          .slider-config__option-item
             +inputText(
               {
                 topic : "min текущий",
@@ -81,7 +81,7 @@ mixin sliderConfig({ id })
                 id : "minStart"+id,
               }
             )
-          div.slider-config__option-item
+          .slider-config__option-item
             +inputText(
               {
                 topic : "max текущий",
@@ -90,9 +90,9 @@ mixin sliderConfig({ id })
               }
             )
 
-        div.slider-config__option.slider-config__option_wide
+        .slider-config__option.slider-config__option_wide
           h2 Тип
-          div.slider-config__option-item
+          .slider-config__option-item
             +radiogroup(
               {
                 nameGroup : "rbGroopType"+id,
@@ -112,9 +112,9 @@ mixin sliderConfig({ id })
               }
             )
 
-        div.slider-config__option.slider-config__option_wide
+        .slider-config__option.slider-config__option_wide
           h2 Ориентация
-          div.slider-config__option-item
+          .slider-config__option-item
             +radiogroup(
               {
                 nameGroup : "rbGroopOrientation"+id,
@@ -131,9 +131,9 @@ mixin sliderConfig({ id })
               }
             )
 
-        div.slider-config__option
+        .slider-config__option
           h2 Числовой диапазон
-          div.slider-config__option-item
+          .slider-config__option-item
             +radiogroup(
               {
                 nameGroup : "rbGroopValue"+id,
