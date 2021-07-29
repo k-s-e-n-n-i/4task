@@ -27,11 +27,18 @@ const pluginsDate = [
     chunks: ['index'],
     template: paths.source + '/index.pug',
   }),
+  new HtmlWebpackPlugin({
+    title: 'Webpack app',
+    filename: 'page-demo-sliders.html',
+    chunks: ['page-demo-sliders'],
+    template: paths.source + '/pages/page-demo-sliders/page-demo-sliders.pug',
+  }),
 ];
 
 const entryDate = {
+  'index.js': paths.source + '/index.js',
   'layout.js': paths.source + '/blocks/layout/layout.js',
-  'page-demo-sliders.js': paths.source + '/page-demo-sliders/page-demo-sliders.js',
+  'page-demo-sliders.js': paths.source + '/pages/page-demo-sliders/page-demo-sliders.js',
 };
 
 const common = merge([
@@ -46,6 +53,7 @@ const common = merge([
     resolve: {
       alias: {
         '@Blocks': path.resolve(__dirname, 'src/blocks/'),
+        '@Pages': path.resolve(__dirname, 'src/pages/'),
         '@': path.resolve(__dirname, 'src/'),
       },
     },

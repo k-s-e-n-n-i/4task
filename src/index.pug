@@ -1,7 +1,25 @@
 extends ~@Blocks/layout/layout.pug
+include ~@Blocks/link/link.pug
 
 block links
-  link(rel="stylesheet" type="text/css" href="./css/page-demo-sliders.js.css")
+  link(rel="stylesheet" type="text/css" href="./css/index.js.css")
 
 block content
-  include ~@/page-demo-sliders/page-demo-sliders.pug
+  .start-page
+    h2 Pages Toxin:
+    .start-page__links
+      .start-page__link
+        +link(
+          {
+            text : "Слайдеры",
+            url : "./page-demo-sliders.html",
+          }
+        )
+      .start-page__link
+        +link(
+          {
+            text : "Тесты",
+            url : "./registration.html",
+          }
+        )
+  script(src="./js/index.js")

@@ -4,7 +4,7 @@ import '@Blocks/radiogroup/radiogroup.scss';
 import '@Blocks/range-slider/range-slider.scss';
 import '@Blocks/slider-config/slider-config.scss';
 import '@Blocks/topic-label/topic-label.scss';
-import '@/page-demo-sliders/page-demo-sliders.scss';
+import '@Pages/page-demo-sliders/page-demo-sliders.scss';
 
 import '@/modules/plugin.slider/plugin.slider.ts';
 
