@@ -8,15 +8,14 @@ export class Model {
   range: HTMLElement;
   rangeLeft: HTMLElement;
   rangeRight: HTMLElement;
-  elemValueMin: object;
-  elemValueMax: object;
-  checkboxSettings: object;
-  settingsBlock: object;
-  labelBlock: object;
-  labelMin: object;
-  labelDash: object;
-  labelMax: object;
-  blockScaleVals: object;
+  elemValueMin: HTMLElement;
+  elemValueMax: HTMLElement;
+  checkboxSettings: HTMLInputElement;
+  settingsBlock: HTMLElement;
+  labelBlock: HTMLElement;
+  labelMin: HTMLElement;
+  labelDash: HTMLElement;
+  labelMax: HTMLElement;
 
   constructor(option: Options) {
     this.thisSlider = option.element;
@@ -34,7 +33,6 @@ export class Model {
     this.labelMin = this.rangeSlider.querySelector('span.range-slider__label-min');
     this.labelDash = this.rangeSlider.querySelector('span.range-slider__label-dash');
     this.labelMax = this.rangeSlider.querySelector('span.range-slider__label-max');
-    this.blockScaleVals = this.slider.querySelectorAll('.range-slider__scale-val');
   }
 
   getWidth(): number {
