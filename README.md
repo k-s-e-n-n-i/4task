@@ -8,7 +8,7 @@ https://k-s-e-n-n-i.github.io/4task/
 
 
 ## Клонирование репозитория локально
-$ git clone https://github.com/KsuVla/4task
+$ git clone https://github.com/k-s-e-n-n-i/4task
 
 
 ## yarn команды для работы с проектом
