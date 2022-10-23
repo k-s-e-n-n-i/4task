@@ -2,7 +2,7 @@
 
 
 ## Github pages 
-https://ksuvla.github.io/4task/
+https://k-s-e-n-n-i.github.io/4task/
 
 При запуске проекта отображается несколько слайдеров с разными параметрами.
 
